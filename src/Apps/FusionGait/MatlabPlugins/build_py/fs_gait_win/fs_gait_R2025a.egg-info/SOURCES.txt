@@ -1,0 +1,8 @@
+pyproject.toml
+setup.py
+fs_gait/__init__.py
+fs_gait/fs_gait.ctf
+fs_gait_R2025a.egg-info/PKG-INFO
+fs_gait_R2025a.egg-info/SOURCES.txt
+fs_gait_R2025a.egg-info/dependency_links.txt
+fs_gait_R2025a.egg-info/top_level.txt
