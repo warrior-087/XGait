@@ -463,21 +463,32 @@ class User:
 
     def _parse_paths(self):
         """
-        Parse according to the file naming rule: id-a-b-rx.dat
+        Compatibility parsing:
+        New version: user1-1-11-d1-r1.wav (with tag)
+        Old version: user1-1-11-r1.wav    (without tag)
         """
-        # A generic file parsing function
-        parse_files = lambda directory, pattern, dtype: [
-            self.data.add_file(dtype, *map(int, m.groups()[1:]), f)
-            for f in directory.glob("*")
-            if (m := pattern.match(f.name)) and int(m.group(1)) == self.user_id
-        ]
 
-        wifi_pattern = re.compile(r'^(?:user)?(\d+)-(\d+)-(\d+)-r(\d+)\.dat$', re.IGNORECASE)
-        acoustic_pattern = re.compile(r'^(?:user)?(\d+)-(\d+)-(\d+)-r(\d+)\.wav$', re.IGNORECASE)
+        def parse_files(directory, pattern, dtype):
+            for f in directory.glob("*"):
+                m = pattern.match(f.name)
+                if m:
+                    # m.group(1): user_id
+                    # m.group(2): trajid
+                    # m.group(3): repid
+                    # m.group(4): tag (None if not matched)
+                    # m.group(5): rx_id
+                    u_id, t_id, r_id = map(int, m.groups()[:3])
+                    rx_id = int(m.group(5))
 
-        # WiFi
+                    if u_id == self.user_id:
+                        self.data.add_file(dtype, t_id, r_id, rx_id, f)
+
+        # Core regex improvement:
+        # (?:-([^-]+))?  --> matches the optional "-tag" part
+        wifi_pattern = re.compile(r'^(?:user)?(\d+)-(\d+)-(\d+)(?:-([^-]+))?-r(\d+)\.dat$', re.IGNORECASE)
+        acoustic_pattern = re.compile(r'^(?:user)?(\d+)-(\d+)-(\d+)(?:-([^-]+))?-r(\d+)\.wav$', re.IGNORECASE)
+
         parse_files(self.wifi_dir, wifi_pattern, "wifi")
-        # Acoustic
         parse_files(self.acoustic_dir, acoustic_pattern, "acoustic")
 
 

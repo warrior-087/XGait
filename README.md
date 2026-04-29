@@ -67,7 +67,9 @@ XGait/
 ├── data/                     # Datasets
 │   ├── FusionGait/          # Multi-modality sensor data
 │   │   ├── Home/
-│   │   └── Laboratory/
+│   │   ├── Laboratory/
+|   |   ├── MeetingRoom/
+|   |   └── MeetingRoom-DifferentDays
 │   └── GaitVideo/           # Video recordings
 ├── src/                      # Source code
 │   ├── data_path_cfg.py     # Data path configuration

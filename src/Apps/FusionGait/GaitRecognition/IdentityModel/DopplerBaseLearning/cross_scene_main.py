@@ -171,24 +171,42 @@ def main():
         "dataset_name": "doppler",
         "fusion_dataset_name": "doppler_fusion",
         "traj_sample_percentage": 100,
-        "split_strategy": "random",  # NOTE: this is random split, not traj-based split
+        "split_strategy": "random",  # NOTE: this is random split
     }
 
     SCENARIO_OVERRIDES = {
         "Home": {
-            "user_num_classes": 4,
-            "selected_users": [1, 3, 12, 14],  # Must match the source scenario's user set for fair evaluation
+            "user_num_classes": 10,
+            "selected_users": [1, 2, 3, 6, 7, 9, 10, 12, 13, 15],  # Must match the source scenario's user set for fair evaluation
             "train_trajs": [],
             "val_trajs": [],
             "test_trajs": [1, 3, 4, 5],
         },
         "Laboratory": {
-            "user_num_classes": 4,
-            "selected_users": [1, 3, 12, 14],
+            "user_num_classes": 10,
+            "selected_users": [1, 2, 3, 6, 7, 9, 10, 12, 13, 15],
             "train_trajs": [2, 3, 4, 5, 6, 7, 8],
             "val_trajs": [9],
             "test_trajs": [1],
         },
+        "MeetingRoom": {
+            "user_num_classes": 10,
+            "selected_users": [1, 2, 3, 6, 7, 9, 10, 12, 13, 15], 
+            "train_trajs": [], "val_trajs": [], "test_trajs": [1, 3, 4, 5]
+        }
+
+
+        # "MeetingRoom": {
+        #     "user_num_classes": 6,
+        #     "selected_users": [1, 2, 3, 4, 6, 21], 
+        #     "train_trajs": [], "val_trajs": [], "test_trajs": [1, 3, 4, 5]
+        # },
+        # "MeetingRoom_DifferentDays": {
+        #     "user_num_classes": 6,
+        #     "selected_users": [1, 2, 3, 4, 6, 21], 
+        #     "train_trajs": [], "val_trajs": [], "test_trajs": [1, 3, 4, 5]
+        # },
+
     }
 
     # ---------------------------------------------------------

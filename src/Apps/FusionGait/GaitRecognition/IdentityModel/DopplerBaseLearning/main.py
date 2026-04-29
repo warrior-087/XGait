@@ -54,8 +54,8 @@ def main():  # run_model_suite
     # Scenario-specific overrides
     SCENARIO_OVERRIDES = {
         "Home": {
-            "user_num_classes": 8,
-            "selected_users": [1, 2, 3, 12, 14, 21, 22, 23],
+            "user_num_classes":19 ,
+            "selected_users": [1,2,3,6,7,8,9,10,12,13,14,15,21,22,23,24,25,26,27],
             "selected_trajs": [1, 2, 3, 4, 5],
             "train_trajs": [1, 2, 3],
             "val_trajs": [4],
@@ -68,6 +68,14 @@ def main():  # run_model_suite
             "train_trajs": [2, 3, 4, 5, 6, 7, 8],
             "val_trajs": [9],
             "test_trajs": [1]
+        },
+        "MeetingRoom":{
+            "user_num_classes": 20,
+            "selected_users": [1,2,3,4,5,6,7,9,10,12,13,15,17,21,22,23,24,25,26,27],
+            "selected_trajs": [1, 2, 3, 4, 5],
+            "train_trajs": [1, 2, 3],
+            "val_trajs": [4],
+            "test_trajs": [5]
         }
     }
 
