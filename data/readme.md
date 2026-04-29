@@ -3,18 +3,21 @@
 This folder contains the **multi-modality dataset** collected for the fusionGait project. The dataset captures human gait patterns using WiFi CSI (Channel State Information), acoustic signals, and video (for ground truth generation).
 
 ## 1. Data Collection Scenarios
-XGait is collected in two distinct environments to ensure diversity:
+XGait is collected in three distinct environments to ensure diversity:
 1.  **Laboratory**: A controlled, open environment with minimal furniture interference.
 2.  **Home**: A real-world home environment with complex multipath effects caused by furniture and layout.
+3.  **Meeting-room**: A small meeting-room environment with central furniture.
 
-<img src="../Tools/Image_res/Scenarios.png" alt="Scenarios" width="500"/>
+<img src="../Tools/Image_res/Scenarios.png" alt="Scenarios" width="800"/>
 
 
 ## 2. Subjects
-A total of **23 volunteers** participated in the data collection.
+A total of **27 volunteers** participated in the data collection.
 - **Laboratory Subset**: Contains data from **20** subjects.
-- **Home Subset**: Contains data from **8** subjects.
-*(Note: Five subjects participated in both scenarios.)*
+- **Home Subset**: Contains data from **19** subjects.
+- **Meeting-room Subset**: Contains data from **20** subjects.
+- **Meeting-room DifferentDays Subset**: Contains data from **6** subjects.
+*(Note: Ten subjects participated across three scenarios.)*
 
 ## 3. Collection Protocol
 Data collection was organized by predefined walking paths in each environment.
@@ -23,6 +26,8 @@ Data collection was organized by predefined walking paths in each environment.
 | :--- | :--- | :--- | :--- | :--- |
 | **Laboratory** | 9 paths | 30 round trips | 60 walks | 540 samples |
 | **Home** | 5 paths | 25 round trips | 50 walks | 250 samples |
+| **Meeting-room** | 5 paths | 25 round trips | 50 walks | 250 samples |
+| **Meeting-room Different days** | 5 paths | 25-50 round trips |50-100 walks | 250-500 samples |
 
 *Note: "1 Round trip" = 1 walk there + 1 walk back = 2 data instances.*
 
@@ -54,7 +59,8 @@ Data/
 │   │   ├── senario_cfg.json
 │   │   └── user1/
 │   │       ├── ...
-│   └── GaitVideo/
+|   ├── MeetingRoom/
+│   ├── MeetingRoom_DifferentDays/
 └── GaitVideo/
 ```
 
