@@ -665,7 +665,6 @@ This guide contains the following sections:
 
 ## 5. Acknowledgments
 
-The matlab code in this project references open-source implementations from the **Widar** project for WiFi-based human tracking algorithms.
+We sincerely thank all **27 volunteers** who participated in the XGait data collection.
 
-- **Widar**: Decimeter-Level Passive Tracking via Velocity Monitoring with Commodity Wi-Fi
-  - link:http://tns.thss.tsinghua.edu.cn/wifiradar/WidarProject.zip
+The MATLAB code in this project references open-source implementations from the Widar project for WiFi-based human tracking algorithms. This project also builds upon Linux 802.11n CSI Tool, csiread, TFTB, Ultralytics YOLOv8, and AprilTag. We thank the authors of these projects for making their work publicly available.

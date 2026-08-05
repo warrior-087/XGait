@@ -68,3 +68,15 @@ Data/
 - **`wifi/*.dat`**: Raw CSI data from Intel 5300 NICs (Channel State Information)
 - **`acoustic/*.wav`**: Audio signals captured by microphones
 - **`track_groundTruth/*.npy`**: Ground-truth trajectory data (processed from video)
+
+## 5. Data Download
+
+Due to the large size of the full dataset (100GB+), the XGait dataset is hosted on Kaggle rather than directly in this GitHub repository.
+
+| Platform | Link |
+|:---------|:-----|
+| **Kaggle** | [XGait-Paper-Dataset](https://www.kaggle.com/datasets/weilaiyilai55/xgait-paper-dataset) |
+
+After downloading the four scenario folders (**Home**, **Laboratory**, **MeetingRoom**, **MeetingRoom-DifferentDays**) from Kaggle, place them under the `data/FusionGait/` directory.
+
+Please refer to the main [README.md](../README.md) for the complete citation and contact information.
