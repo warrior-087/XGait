@@ -80,3 +80,43 @@ Due to the large size of the full dataset (100GB+), the XGait dataset is hosted 
 After downloading the four scenario folders (**Home**, **Laboratory**, **MeetingRoom**, **MeetingRoom-DifferentDays**) from Kaggle, place them under the `data/FusionGait/` directory.
 
 Please refer to the main [README.md](../README.md) for the complete citation and contact information.
+
+## 6. Important Usage Notes and Known Data Issues
+
+### Synchronization and Ground-Truth Alignment
+
+> [!NOTE]
+> **The recordings are not strictly synchronized across devices.** Per-frame timestamps were not explicitly recorded, so the two wireless modalities can only be aligned at a coarse level, for example by matching recording intervals and adjusting signal lengths. Equal-length sequences should not be interpreted as precisely time-synchronized observations.
+>
+> **Video-derived ground truth has a lower temporal resolution than the wireless recordings.** Both the camera frame rate and the resulting trajectory sampling rate are substantially lower than the wireless sampling rates. When evaluating tracking errors, interpolate or resample the reference and predicted trajectories onto a common temporal grid over the corresponding recording interval. This aligns the number of points but does not eliminate timing uncertainty or interpolation error. Please report the alignment procedure used in your experiments.
+
+### Known Missing or Abnormal Data
+
+> [!WARNING]
+> Device failures and other acquisition issues resulted in some missing or abnormal data. Check input validity before processing; the collection protocol above describes the intended acquisition schedule, not a guarantee that every file is present and usable.
+
+1. **Unavailable acoustic channel:** Rx2 acoustic data for User3 and Users15–20 are reported as empty/unavailable. Do not treat an empty channel as a valid observation. Here, “empty” refers to unavailable signal data and does not necessarily mean a zero-byte file.
+
+2. **Zero-byte Wi-Fi file:**
+
+   - `Laboratory/user4/wifi/user4-4-7-r1.dat`
+
+3. **Abnormal WAV headers:** The following files failed the WAV header check because the expected RIFF identifier was not found. They require further inspection before use:
+
+   - `Laboratory/user11/acoustic/user11-1-5-r2.wav`
+   - `Laboratory/user16/acoustic/user16-6-59-r2.wav`
+   - `Laboratory/user17/acoustic/user17-8-14-r2.wav`
+   - `Home/user9/acoustic/user9-2-40-r1.wav`
+   - `Home/user9/acoustic/user9-2-40-r2.wav`
+   - `Home/user9/acoustic/user9-2-40-r3.wav`
+
+4. **Day-aware recording identifiers:** In `MeetingRoom_DifferentDays`, User6's path 3, repetition 41 has both `d6` and `d7` versions, covering all three receivers in both modalities. These are distinct day-tagged recordings, not files to deduplicate. Include the day tag in the recording key, e.g., `(scenario, user, path, repetition, day, receiver, modality)`, to prevent one version from overwriting the other during loading.
+
+### Handling Missing or Invalid Inputs
+
+> [!IMPORTANT]
+> Configure or adapt the public data-loading code to skip invalid files/recordings or explicitly mask unavailable channels, depending on the method's input requirements. Skipping or masking is not data recovery: zero-filling an unavailable channel does not restore the missing measurement.
+>
+> Repair a malformed header only when the underlying signal payload and its format can be verified, and preserve the original file. Empty or missing recordings cannot be reconstructed by simply editing a header. If a loader still raises an error, inspect the reported file and adjust the relevant validation or exception handling; automatic handling of every acquisition anomaly is not guaranteed.
+>
+> For paired-modality experiments, use the intersection of valid recording identifiers. Document any exclusions, repairs, missing-channel handling, and the final sample counts so that results remain reproducible. Missing trajectory ground truth is not necessarily a data defect; such recordings can still support identification evaluation when identity labels and valid signals are available.
